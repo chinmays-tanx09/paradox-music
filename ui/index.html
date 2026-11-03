@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Paradox Music</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app" id="app" data-sidebar="open" data-mode="boot">
+
+  <!-- first launch -->
+  <section class="setup" id="setup" hidden>
+    <div class="setup-in">
+      <img class="appicon" src="icon.png" alt="">
+      <h1>Paradox Music</h1>
+      <p class="sub" id="setupSub">Choose your music folder. Every song inside it, subfolders included, becomes your library.</p>
+      <button class="pick" id="pickBtn" data-has="0">
+        <span class="pick-ic"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+        <span class="pick-text"><span class="pick-t" id="pickTitle">Choose folder</span><span class="pick-s" id="pickPath">Music, Downloads, an external drive…</span></span>
+        <span class="pick-chg">Change</span>
+      </button>
+      <button class="btn primary wide" id="startBtn" disabled>Start</button>
+      <div class="setup-scan" id="setupScan" hidden>
+        <div class="bar"><div class="bar-fill" id="setupBar"></div></div>
+        <div class="small muted" id="setupScanText">Scanning…</div>
+      </div>
+      <div class="setup-err small" id="setupErr"></div>
+      <div class="setup-foot small muted">Works offline. Nothing leaves this PC.</div>
+    </div>
+  </section>
+
+  <div class="body" id="body">
+    <div class="scrim" id="scrim"></div>
+    <aside class="sidebar" aria-label="Menu">
+      <div class="sb-top">
+        <img class="sb-logo" src="icon.png" alt=""><span class="sb-name">Paradox Music</span><span class="spacer"></span>
+        <button class="icon-btn" id="sbClose" title="Close sidebar (Ctrl+B)" aria-label="Close sidebar"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg></button>
+      </div>
+      <nav class="nav">
+        <button class="nav-item" data-view="songs"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg><span>Songs</span><span class="nav-count" id="cSongs"></span></button>
+        <button class="nav-item" data-view="albums"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></svg><span>Albums</span><span class="nav-count" id="cAlbums"></span></button>
+        <button class="nav-item" data-view="artists"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>Artists</span><span class="nav-count" id="cArtists"></span></button>
+      </nav>
+      <div class="sb-sec"><span>Playlists</span><button class="icon-btn xs" id="newPl" title="New playlist" aria-label="New playlist"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+      <nav class="nav pl-nav" id="plNav"></nav>
+      <div class="sb-foot">
+        <button class="nav-item" data-view="settings"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Settings</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn" id="sbToggle" title="Open sidebar (Ctrl+B)" aria-label="Open sidebar"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></svg></button>
+        <button class="icon-btn" id="backBtn" title="Back" aria-label="Back" hidden><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="brand" id="brand">Paradox Music</div>
+        <div class="spacer"></div>
+        <label class="search" id="searchBox"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="search" type="text" placeholder="Search" spellcheck="false" autocomplete="off"><button class="search-x" id="searchX" aria-label="Clear search"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></label>
+        <button class="icon-btn" id="sortBtn" title="Sort" aria-label="Sort"><svg viewBox="0 0 24 24"><path d="M7 4v16M3.5 16.5 7 20l3.5-3.5M17 20V4M13.5 7.5 17 4l3.5 3.5"/></svg></button>
+        <button class="icon-btn" id="scanBtn" title="Rescan library" aria-label="Rescan library"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
+        <button class="icon-btn" id="queueBtn" title="Queue" aria-label="Queue"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 11h16M4 16h9"/><path d="M16 14v6l5-3z" fill="currentColor"/></svg></button>
+      </header>
+      <div class="views" id="views"></div>
+      <div class="drop" id="drop"><div class="drop-in"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg><div>Drop to play</div></div></div>
+    </main>
+
+    <aside class="qpanel" id="qpanel" aria-label="Queue">
+      <div class="qp-head"><span class="qp-title">Queue</span><span class="spacer"></span><button class="link" id="qClear">Clear</button><button class="icon-btn" id="qClose" aria-label="Close queue"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <div class="qp-body" id="qBody"></div>
+    </aside>
+  </div>
+
+  <footer class="player" id="player" data-state="empty">
+    <div class="np">
+      <button class="np-cover" id="npCover" title="Now playing"></button>
+      <div class="np-meta"><div class="np-t" id="npTitle">Nothing playing</div><div class="np-a" id="npArtist">Pick a song to start</div></div>
+    </div>
+    <div class="ctl">
+      <div class="ctl-btns">
+        <button class="icon-btn sm tgl" id="shufBtn" title="Shuffle" aria-label="Shuffle"><svg viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg></button>
+        <button class="icon-btn" id="prevBtn" title="Previous (Ctrl+←)" aria-label="Previous"><svg viewBox="0 0 24 24" class="fill"><path d="M18 6.2v11.6a.9.9 0 0 1-1.4.75L8.6 12.75a.9.9 0 0 1 0-1.5l8-5.8A.9.9 0 0 1 18 6.2z"/><rect x="5" y="5.5" width="2.4" height="13" rx="1"/></svg></button>
+        <button class="playbtn" id="playBtn" title="Play (Space)" aria-label="Play"><span class="i-play"><svg viewBox="0 0 24 24" class="fill"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.2-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></span><span class="i-pause"><svg viewBox="0 0 24 24" class="fill"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg></span></button>
+        <button class="icon-btn" id="nextBtn" title="Next (Ctrl+→)" aria-label="Next"><svg viewBox="0 0 24 24" class="fill"><path d="M6 6.2v11.6a.9.9 0 0 0 1.4.75l8-5.8a.9.9 0 0 0 0-1.5l-8-5.8A.9.9 0 0 0 6 6.2z"/><rect x="16.6" y="5.5" width="2.4" height="13" rx="1"/></svg></button>
+        <button class="icon-btn sm tgl" id="repBtn" title="Repeat: off" aria-label="Repeat"><svg viewBox="0 0 24 24"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span class="rep1">1</span></button>
+      </div>
+      <div class="seek"><span class="time" id="curTime">0:00</span><input class="range" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek"><span class="time" id="durTime">0:00</span></div>
+    </div>
+    <div class="right">
+      <button class="icon-btn sm" id="volBtn" title="Mute" aria-label="Mute"><span class="i-vol"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></span><span class="i-mute"><svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg></span></button>
+      <input class="range vol" id="vol" type="range" min="0" max="100" value="80" aria-label="Volume">
+    </div>
+  </footer>
+
+  <div class="menu" id="menu" hidden></div>
+  <div class="modal" id="modal" hidden><div class="modal-card" id="modalCard"></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+<audio id="a0" preload="auto"></audio><audio id="a1" preload="auto"></audio>
+<script src="queue.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
