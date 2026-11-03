@@ -39,8 +39,8 @@ jobs:
         with:
           workspaces: './src-tauri -> target'
           key: test
-      - name: Unit tests (queue, shuffle, repeat)
-        run: node --test ui/test/queue.test.js
+      - name: Unit tests (queue, shuffle, repeat; smart playlists, play counting, mixes)
+        run: node --test ui/test/queue.test.js ui/test/smart.test.js
       - name: Unit tests (library scan, tags, cover art)
         run: cargo test --manifest-path src-tauri/Cargo.toml
 

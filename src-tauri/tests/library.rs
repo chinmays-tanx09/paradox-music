@@ -196,3 +196,32 @@ fn shared_art_survives_parallel_scans() {
         assert_eq!(std::fs::read_dir(covers.dir()).unwrap().count(), 2, "no temp files left behind");
     }
 }
+
+#[test]
+fn reads_genres_and_upgrades_old_libraries() {
+    let (t, root) = fixture_copy();
+    let covers = Covers::new(t.path().join("covers"));
+    let ts = scan_all(&root, &covers, &[]);
+    assert_eq!(by_title(&ts, "Morning Light").genre, "Pop; Dance", "ID3v2 TCON (mp3)");
+    assert_eq!(by_title(&ts, "City Rain").genre, "Hip-Hop", "MP4 (m4a)");
+    assert_eq!(by_title(&ts, "Glass").genre, "hip hop", "Vorbis comment (flac)");
+    assert_eq!(by_title(&ts, "Voice Memo").genre, "", "no genre tag");
+    assert!(ts.iter().all(|t| t.v == library::TRACK_SCHEMA));
+
+    // a library saved by 1.0.0 has no genre and no schema number: each song is read once more,
+    // keeping the date it was first added, even though the files did not change
+    let mut old = ts.clone();
+    for o in old.iter_mut() {
+        o.genre.clear();
+        o.v = 0;
+        o.added = 777;
+    }
+    let up = scan_all(&root, &covers, &old);
+    assert_eq!(by_title(&up, "Morning Light").genre, "Pop; Dance");
+    assert!(up.iter().all(|t| t.added == 777 && t.v == library::TRACK_SCHEMA));
+
+    // and the 1.0.0 JSON (no "genre", no "v") still loads
+    let json = r#"[{"id":"x","path":"C:\\a.mp3","title":"A","artist":"B","album":"C","album_artist":"","track":1,"disc":0,"year":2001,"duration":1.0,"cover":null,"size":1,"mtime":1,"added":5,"format":"mp3","from_filename":false}]"#;
+    let v: Vec<Track> = serde_json::from_str(json).unwrap();
+    assert_eq!((v[0].genre.as_str(), v[0].v, v[0].year), ("", 0, 2001));
+}

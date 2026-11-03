@@ -41,9 +41,14 @@
         <button class="nav-item" data-view="songs"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg><span>Songs</span><span class="nav-count" id="cSongs"></span></button>
         <button class="nav-item" data-view="albums"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/></svg><span>Albums</span><span class="nav-count" id="cAlbums"></span></button>
         <button class="nav-item" data-view="artists"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0"/></svg><span>Artists</span><span class="nav-count" id="cArtists"></span></button>
+        <button class="nav-item" data-view="smart"><svg viewBox="0 0 24 24"><path d="M11 3.5l1.7 4.6 4.6 1.7-4.6 1.7L11 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg><span>Smart</span></button>
       </nav>
-      <div class="sb-sec"><span>Playlists</span><button class="icon-btn xs" id="newPl" title="New playlist" aria-label="New playlist"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
-      <nav class="nav pl-nav" id="plNav"></nav>
+      <div class="sb-lists">
+        <div class="sb-sec"><span>Smart playlists</span><button class="icon-btn xs" id="newSm" title="New smart playlist" aria-label="New smart playlist"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <nav class="nav" id="smNav"></nav>
+        <div class="sb-sec"><span>Playlists</span><button class="icon-btn xs" id="newPl" title="New playlist" aria-label="New playlist"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <nav class="nav pl-nav" id="plNav"></nav>
+      </div>
       <div class="sb-foot">
         <button class="nav-item" data-view="settings"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Settings</span></button>
       </div>
@@ -74,6 +79,7 @@
     <div class="np">
       <button class="np-cover" id="npCover" title="Now playing"></button>
       <div class="np-meta"><div class="np-t" id="npTitle">Nothing playing</div><div class="np-a" id="npArtist">Pick a song to start</div></div>
+      <button class="icon-btn sm np-like" id="likeBtn" title="Add to Favorites" aria-label="Like"><svg viewBox="0 0 24 24" class="heart"><path d="M12 20.3s-7.4-4.5-9.2-9.1C1.6 8.1 3.7 4.6 7.3 4.6c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.6 0 5.7 3.5 4.5 6.6-1.8 4.6-9.2 9.1-9.2 9.1z"/></svg></button>
     </div>
     <div class="ctl">
       <div class="ctl-btns">
@@ -97,6 +103,7 @@
 </div>
 <audio id="a0" preload="auto"></audio><audio id="a1" preload="auto"></audio>
 <script src="queue.js"></script>
+<script src="smart.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

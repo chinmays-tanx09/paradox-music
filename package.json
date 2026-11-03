@@ -1,13 +1,13 @@
 {
   "name": "paradox-music",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
     "tauri": "tauri",
     "dev": "tauri dev",
     "build": "tauri build",
-    "test": "node --test ui/test/ && cargo test --manifest-path src-tauri/Cargo.toml"
+    "test": "node --test ui/test/queue.test.js ui/test/smart.test.js && cargo test --manifest-path src-tauri/Cargo.toml"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2"

@@ -24,7 +24,7 @@ pub struct AppState {
     pending_open: Mutex<Vec<String>>,
 }
 
-const JSON_NAMES: &[&str] = &["settings", "playlists", "state"];
+const JSON_NAMES: &[&str] = &["settings", "playlists", "state", "smart", "stats"];
 
 fn read_json(dir: &Path, name: &str) -> Value {
     std::fs::read_to_string(dir.join(format!("{name}.json")))
@@ -108,6 +108,8 @@ fn boot(app: AppHandle, state: State<AppState>) -> Value {
         "settings": settings,
         "library": lib,
         "playlists": read_json(&state.data_dir, "playlists"),
+        "smart": read_json(&state.data_dir, "smart"),
+        "stats": read_json(&state.data_dir, "stats"),
         "state": read_json(&state.data_dir, "state"),
         "coversDir": state.covers.dir().to_string_lossy(),
         "sep": std::path::MAIN_SEPARATOR.to_string(),

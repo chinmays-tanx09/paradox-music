@@ -27,6 +27,10 @@ const SKIP_DIRS: &[&str] = &["$recycle.bin", "system volume information", "node_
 
 const COVER_MAX: u32 = 600;
 
+/// Bumped when read_track learns to read something new (2 = genre), so a rescan re-reads
+/// songs saved by an older version once, even when the file itself has not changed.
+pub const TRACK_SCHEMA: u32 = 2;
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Default)]
 #[serde(default)]
 pub struct Track {
@@ -39,6 +43,8 @@ pub struct Track {
     pub track: u32,
     pub disc: u32,
     pub year: u32,
+    /// Genre tag as written; several values are joined with "; " (split and merged in the window).
+    pub genre: String,
     /// Seconds.
     pub duration: f64,
     /// File name inside the covers folder, if the song has art.
@@ -51,6 +57,8 @@ pub struct Track {
     pub format: String,
     /// True when title/artist came from the file name, not from tags.
     pub from_filename: bool,
+    /// Which TRACK_SCHEMA read this song (0 = saved by 1.0.0, before genres were read).
+    pub v: u32,
 }
 
 pub fn is_audio(p: &Path) -> bool {
@@ -133,6 +141,18 @@ pub fn parse_filename(stem: &str) -> (Option<u32>, Option<String>, String) {
 
 fn clean(s: Option<std::borrow::Cow<'_, str>>) -> Option<String> {
     s.map(|v| v.trim().trim_matches('\0').to_string()).filter(|v| !v.is_empty())
+}
+
+/// Every genre value in a tag (Vorbis comments and MP4 can hold several), joined with "; ".
+fn read_genre(tag: &lofty::tag::Tag) -> String {
+    let mut out: Vec<String> = Vec::new();
+    for g in tag.get_strings(ItemKey::Genre) {
+        let g = g.trim().trim_matches('\0').trim();
+        if !g.is_empty() && !out.iter().any(|o| o.eq_ignore_ascii_case(g)) {
+            out.push(g.to_string());
+        }
+    }
+    out.join("; ")
 }
 
 /// Cover cache: one file per distinct image, so an album's art is stored once.
@@ -227,7 +247,7 @@ pub fn read_track(path: &Path, covers: &Covers) -> Track {
     let ps = path.to_string_lossy().to_string();
     let (size, mtime) = file_stamp(path);
     let format = path.extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
-    let mut t = Track { id: track_id(&ps), path: ps, size, mtime, added: now_secs(), format, ..Default::default() };
+    let mut t = Track { id: track_id(&ps), path: ps, size, mtime, added: now_secs(), format, v: TRACK_SCHEMA, ..Default::default() };
 
     let mut title = None;
     let mut artist = None;
@@ -242,11 +262,15 @@ pub fn read_track(path: &Path, covers: &Covers) -> Track {
             t.track = tag.track().unwrap_or(0);
             t.disc = tag.disk().unwrap_or(0);
             t.year = tag.date().map(|d| d.year as u32).unwrap_or(0);
+            t.genre = read_genre(tag);
             let pics = tag.pictures();
             let pic = pics.iter().find(|p| p.pic_type() == PictureType::CoverFront).or_else(|| pics.first());
             if let Some(p) = pic {
                 cover = covers.store(p.data());
             }
+        }
+        if t.genre.is_empty() {
+            t.genre = tagged.tags().iter().map(read_genre).find(|g| !g.is_empty()).unwrap_or_default();
         }
         // some files carry art only in a secondary tag
         if cover.is_none() {
@@ -296,7 +320,7 @@ pub fn scan(roots: &[PathBuf], covers: &Covers, previous: &[Track], progress: &(
             let (size, mtime) = file_stamp(p);
             let cover_ok = |t: &Track| t.cover.as_ref().map(|c| covers.dir().join(c).exists()).unwrap_or(true);
             let t = match prev.get(ps.as_ref()) {
-                Some(old) if old.size == size && old.mtime == mtime && cover_ok(old) => (*old).clone(),
+                Some(old) if old.size == size && old.mtime == mtime && old.v >= TRACK_SCHEMA && cover_ok(old) => (*old).clone(),
                 Some(old) => {
                     let mut t = read_track(p, covers);
                     t.added = old.added;

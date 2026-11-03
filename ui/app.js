@@ -7,6 +7,20 @@ const listen = T.event.listen;
 const fileSrc = p => T.core.convertFileSrc(p);
 const ICON = {"side": "<svg viewBox=\"0 0 24 24\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"3\"/><path d=\"M9 4v16\"/></svg>", "songs": "<svg viewBox=\"0 0 24 24\"><path d=\"M9 18V5l11-2v13\"/><circle cx=\"6.5\" cy=\"18\" r=\"2.5\"/><circle cx=\"17.5\" cy=\"16\" r=\"2.5\"/></svg>", "albums": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"2.5\"/></svg>", "artists": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 20a8 8 0 0 1 16 0\"/></svg>", "settings": "<svg viewBox=\"0 0 24 24\"><path d=\"M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0\"/><circle cx=\"16\" cy=\"6\" r=\"2\"/><circle cx=\"10\" cy=\"12\" r=\"2\"/><circle cx=\"18\" cy=\"18\" r=\"2\"/></svg>", "plus": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 5v14M5 12h14\"/></svg>", "list": "<svg viewBox=\"0 0 24 24\"><path d=\"M4 7h11M4 12h11M4 17h7\"/><path d=\"M17 14.5V20l4-2.5z\" fill=\"currentColor\"/></svg>", "search": "<svg viewBox=\"0 0 24 24\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/></svg>", "sort": "<svg viewBox=\"0 0 24 24\"><path d=\"M7 4v16M3.5 16.5 7 20l3.5-3.5M17 20V4M13.5 7.5 17 4l3.5 3.5\"/></svg>", "queue": "<svg viewBox=\"0 0 24 24\"><path d=\"M4 6h16M4 11h16M4 16h9\"/><path d=\"M16 14v6l5-3z\" fill=\"currentColor\"/></svg>", "refresh": "<svg viewBox=\"0 0 24 24\"><path d=\"M20 11a8 8 0 1 0-2.3 5.7\"/><path d=\"M20 4v7h-7\"/></svg>", "back": "<svg viewBox=\"0 0 24 24\"><path d=\"M15 5l-7 7 7 7\"/></svg>", "play": "<svg viewBox=\"0 0 24 24\" class=\"fill\"><path d=\"M8 5.5v13a1 1 0 0 0 1.5.86l10.2-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z\"/></svg>", "pause": "<svg viewBox=\"0 0 24 24\" class=\"fill\"><rect x=\"6.5\" y=\"5\" width=\"4\" height=\"14\" rx=\"1.2\"/><rect x=\"13.5\" y=\"5\" width=\"4\" height=\"14\" rx=\"1.2\"/></svg>", "prev": "<svg viewBox=\"0 0 24 24\" class=\"fill\"><path d=\"M18 6.2v11.6a.9.9 0 0 1-1.4.75L8.6 12.75a.9.9 0 0 1 0-1.5l8-5.8A.9.9 0 0 1 18 6.2z\"/><rect x=\"5\" y=\"5.5\" width=\"2.4\" height=\"13\" rx=\"1\"/></svg>", "next": "<svg viewBox=\"0 0 24 24\" class=\"fill\"><path d=\"M6 6.2v11.6a.9.9 0 0 0 1.4.75l8-5.8a.9.9 0 0 0 0-1.5l-8-5.8A.9.9 0 0 0 6 6.2z\"/><rect x=\"16.6\" y=\"5.5\" width=\"2.4\" height=\"13\" rx=\"1\"/></svg>", "shuffle": "<svg viewBox=\"0 0 24 24\"><path d=\"M16 3h5v5\"/><path d=\"M4 20 21 3\"/><path d=\"M21 16v5h-5\"/><path d=\"M15 15l6 6\"/><path d=\"M4 4l5 5\"/></svg>", "repeat": "<svg viewBox=\"0 0 24 24\"><path d=\"M17 2l4 4-4 4\"/><path d=\"M3 11v-1a4 4 0 0 1 4-4h14\"/><path d=\"M7 22l-4-4 4-4\"/><path d=\"M21 13v1a4 4 0 0 1-4 4H3\"/></svg>", "vol": "<svg viewBox=\"0 0 24 24\"><path d=\"M11 5 6 9H3v6h3l5 4z\"/><path d=\"M15.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M18.5 5.5a9 9 0 0 1 0 13\"/></svg>", "mute": "<svg viewBox=\"0 0 24 24\"><path d=\"M11 5 6 9H3v6h3l5 4z\"/><path d=\"m22 9-6 6M16 9l6 6\"/></svg>", "more": "<svg viewBox=\"0 0 24 24\" class=\"fill\"><circle cx=\"5\" cy=\"12\" r=\"1.7\"/><circle cx=\"12\" cy=\"12\" r=\"1.7\"/><circle cx=\"19\" cy=\"12\" r=\"1.7\"/></svg>", "folder": "<svg viewBox=\"0 0 24 24\"><path d=\"M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/></svg>", "x": "<svg viewBox=\"0 0 24 24\"><path d=\"M6 6l12 12M18 6 6 18\"/></svg>", "note": "<svg viewBox=\"0 0 24 24\"><path d=\"M9 18V5l11-2v13\"/><circle cx=\"6.5\" cy=\"18\" r=\"2.5\"/><circle cx=\"17.5\" cy=\"16\" r=\"2.5\"/></svg>", "clock": "<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/></svg>", "check": "<svg viewBox=\"0 0 24 24\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg>", "drop": "<svg viewBox=\"0 0 24 24\"><path d=\"M12 4v11\"/><path d=\"m7 10 5 5 5-5\"/><path d=\"M5 20h14\"/></svg>"};
 
+Object.assign(ICON, {
+  heart: '<svg viewBox="0 0 24 24" class="heart"><path d="M12 20.3s-7.4-4.5-9.2-9.1C1.6 8.1 3.7 4.6 7.3 4.6c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.6 0 5.7 3.5 4.5 6.6-1.8 4.6-9.2 9.1-9.2 9.1z"/></svg>',
+  spark: '<svg viewBox="0 0 24 24"><path d="M11 3.5l1.7 4.6 4.6 1.7-4.6 1.7L11 16.1l-1.7-4.6-4.6-1.7 4.6-1.7z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>',
+  wave: '<svg viewBox="0 0 24 24"><path d="M3 12h2.5l2-5 3 10 3-14 3 12 2-3H21"/></svg>',
+  edit: '<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
+  most: '<svg viewBox="0 0 24 24"><path d="M5 20V12M10 20V6M15 20v-9M20 20V4"/></svg>',
+  recent: '<svg viewBox="0 0 24 24"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 8v4.5l3 2"/></svg>',
+  added: '<svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+  never: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10 8.8v6.4l5-3.2z"/></svg>',
+  trash: '<svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13"/></svg>',
+});
+const AUTO_ICON = { favorites: 'heart', most: 'most', recent: 'recent', added: 'added', never: 'never', genre: 'spark', decade: 'clock' };
+const Sm = window.PMSmart;
+
 const $ = s => document.querySelector(s);
 const app = $('#app');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -29,6 +43,10 @@ let sortBy = { songs: 'title', albums: 'name', artists: 'name' };
 let query = '';
 let scanning = false;
 let demo = null;
+let stats = {};             // play counts, last played and likes: { id: { p, l, f, fa } }
+let smartLists = [];        // saved smart playlists: [{ id, name, rule, created }]; rules only, never songs
+let mixes = new Map();      // mixes made this session: id -> { name, ids, seed, kind, ref, rnd }
+const sessionSeed = (Date.now() % 100000) + 1;  // keeps "Random" smart lists in one order per session
 
 /* ------------------------------------------------------------------ helpers */
 function cover(name, cls) {
@@ -38,9 +56,54 @@ function albumKey(t) { return (t.album_artist || t.artist).toLowerCase() + '\u00
 function save(name, value) { return invoke('save_json', { name, value }).catch(e => console.warn('save', name, e)); }
 function saveSettings() { return save('settings', settings); }
 function savePlaylists() { return save('playlists', playlists); }
+function saveSmart() { return save('smart', smartLists); }
+let statsTimer;
+function saveStatsSoon() { if (demo) return; clearTimeout(statsTimer); statsTimer = setTimeout(saveStatsNow, 1200); }
+function saveStatsNow() { if (demo) return; clearTimeout(statsTimer); save('stats', Sm.Stats.toJSON(stats)); }
+
+/* ------------------------------------------------------------------ likes, play stats, smart lists */
+const isLiked = id => !!Sm.Stats.get(stats, id).f;
+function likeBtn(id) { const on = isLiked(id); return `<button class="lk${on ? ' on' : ''}" aria-label="${on ? 'Unlike' : 'Like'}" title="${on ? 'Remove from Favorites' : 'Add to Favorites'}">${ICON.heart}</button>`; }
+function setLiked(id, liked) {
+  if (!id || isLiked(id) === !!liked) return;
+  stats = Sm.Stats.setLiked(stats, id, liked, Date.now());
+  saveStatsSoon();
+  document.querySelectorAll(`.trow[data-id="${id}"] .lk`).forEach(b => { b.classList.toggle('on', !!liked); b.title = liked ? 'Remove from Favorites' : 'Add to Favorites'; });
+  syncLike();
+  toast(liked ? 'Added to Favorites' : 'Removed from Favorites');
+  smartChanged();
+}
+const toggleLike = id => setLiked(id, !isLiked(id));
+function syncLike() {
+  const b = $('#likeBtn'); if (!b) return;
+  const on = !!curId && isLiked(curId);
+  b.classList.toggle('on', on); b.title = on ? 'Remove from Favorites' : 'Add to Favorites'; b.setAttribute('aria-label', on ? 'Unlike' : 'Like');
+  const nb = document.querySelector('.now-acts [data-act=like]');
+  if (nb) { nb.classList.toggle('on', on); nb.lastChild.textContent = on ? 'Liked' : 'Like'; }
+}
+function recordPlay(id) {
+  if (!id || demo || !byId.has(id) || byId.get(id)._dropped) return;
+  stats = Sm.Stats.recordPlay(stats, id, Date.now());
+  saveStatsSoon();
+  smartChanged();
+}
+/** Smart lists update themselves: after a play or a like, the sidebar and any smart page on screen catch up. */
+function smartChanged() {
+  renderSmNav();
+  if (['smart', 'auto', 'smartpl'].includes(view.name) && $('#modal').hidden) softRender();
+}
+/** Re-renders the current view in place (no fade, same scroll position). */
+function softRender() {
+  const v = document.querySelector('#views .view'), top = v ? v.scrollTop : 0;
+  render(true);
+  const n = document.querySelector('#views .view'); if (n) n.scrollTop = top;
+}
+const smartNow = () => Date.now();
+function evalRule(rule) { return Sm.evaluate(rule, tracks, stats, smartNow(), sessionSeed); }
+function autoDef(key) { return Sm.autoByKey(key, tracks); }
 let toastTimer;
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2200); }
-function matches(t, q) { return !q || t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q) || t.album.toLowerCase().includes(q); }
+function matches(t, q) { return !q || t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q) || t.album.toLowerCase().includes(q) || (t.genre || '').toLowerCase().includes(q); }
 
 /* ------------------------------------------------------------------ library index */
 function indexLibrary(list) {
@@ -84,7 +147,8 @@ function indexLibrary(list) {
 const SORTS = {
   songs: { title: ['Title', (a, b) => coll.compare(a.title, b.title)], artist: ['Artist', (a, b) => coll.compare(a.artist, b.artist) || coll.compare(a.album, b.album) || (a.track - b.track)],
     album: ['Album', (a, b) => coll.compare(a.album, b.album) || (a.disc - b.disc) || (a.track - b.track)], added: ['Recently added', (a, b) => (b.added - a.added) || (b.mtime - a.mtime) || coll.compare(a.title, b.title)],
-    duration: ['Duration', (a, b) => (b.duration - a.duration)] },
+    duration: ['Duration', (a, b) => (b.duration - a.duration)],
+    plays: ['Most played', (a, b) => (Sm.Stats.get(stats, b.id).p - Sm.Stats.get(stats, a.id).p) || coll.compare(a.title, b.title)] },
   albums: { name: ['Name', (a, b) => coll.compare(a.name, b.name)], artist: ['Artist', (a, b) => coll.compare(a.artist, b.artist) || coll.compare(a.name, b.name)],
     year: ['Year', (a, b) => (b.year - a.year) || coll.compare(a.name, b.name)], added: ['Recently added', (a, b) => (b.added - a.added)] },
   artists: { name: ['Name', (a, b) => coll.compare(a.name, b.name)], songs: ['Most songs', (a, b) => b.tracks.length - a.tracks.length || coll.compare(a.name, b.name)] },
@@ -103,18 +167,20 @@ function go(name, arg, opts) {
 }
 function back() { const v = history.pop(); if (v) go(v.name, v.arg, { back: true }); }
 
-function render() {
+function render(soft) {
   const v = view.name;
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', !!(n.dataset.view === v || (n.dataset.pl && v === 'playlist' && n.dataset.pl === view.arg))));
-  $('#backBtn').hidden = !['album', 'artist', 'now'].includes(v);
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', !!(n.dataset.view === v || (n.dataset.pl && v === 'playlist' && n.dataset.pl === view.arg)
+    || (n.dataset.sm && (v === 'auto' || v === 'smartpl') && n.dataset.sm === view.arg))));
+  $('#backBtn').hidden = !['album', 'artist', 'now', 'auto', 'smartpl', 'mix'].includes(v);
   $('#sortBtn').hidden = !['songs', 'albums', 'artists'].includes(v);
   const host = $('#views');
   host.innerHTML = '';
   const el = document.createElement('section');
-  el.className = 'view';
+  el.className = 'view' + (soft ? ' still' : '');
   host.appendChild(el);
-  if (!tracks.length && ['songs', 'albums', 'artists'].includes(v)) return renderEmpty(el);
-  ({ songs: renderSongs, albums: renderAlbums, artists: renderArtists, album: renderAlbum, artist: renderArtist, playlist: renderPlaylist, settings: renderSettings, now: renderNow }[v] || renderSongs)(el);
+  if (!tracks.length && ['songs', 'albums', 'artists', 'smart'].includes(v)) return renderEmpty(el);
+  ({ songs: renderSongs, albums: renderAlbums, artists: renderArtists, album: renderAlbum, artist: renderArtist, playlist: renderPlaylist, settings: renderSettings, now: renderNow,
+    smart: renderSmart, auto: renderAuto, smartpl: renderSmartPl, mix: renderMix }[v] || renderSongs)(el);
 }
 
 function scanStrip() { return scanning ? `<div class="scanning"><span id="scanTxt">Updating library…</span><div class="bar"><div class="bar-fill" id="scanFill"></div></div></div>` : ''; }
@@ -139,7 +205,7 @@ function rowHTML(t, i, o) {
     <span class="tn"><span class="n">${n || ''}</span><span class="pi">${ICON.play}</span><span class="eq"><i></i><i></i><i></i></span></span>
     <span class="tt">${o.noCover ? '' : cover(t.cover, 'r6')}<span class="tl"><span class="t1">${esc(t.title)}</span><span class="t2">${esc(t.artist)}</span></span></span>
     <span class="ta">${esc(t.album)}</span>
-    <span class="td">${fmt(t.duration)}</span>
+    <span class="td">${likeBtn(t.id)}<span class="dur">${fmt(t.duration)}</span></span>
     <button class="more" aria-label="More">${ICON.more}</button></div>`;
 }
 const theadHTML = `<div class="thead"><span style="text-align:center">#</span><span>Title</span><span class="ah">Album</span><span class="r">${ICON.clock}</span><span></span></div>`;
@@ -150,13 +216,14 @@ function wireRows(container, list, ctx) {
   container.addEventListener('click', e => {
     const row = e.target.closest('.trow'); if (!row) return;
     const i = +row.dataset.i;
+    if (e.target.closest('.lk')) { e.stopPropagation(); return toggleLike(row.dataset.id); }
     if (e.target.closest('.more')) { e.stopPropagation(); return trackMenu(e, list(), i, ctx); }
     if (e.target.closest('.pi')) return playList(list().map(t => t.id), i);
     container.querySelectorAll('.trow.sel').forEach(r => r.classList.remove('sel'));
     row.classList.add('sel'); sel = i;
   });
   container.addEventListener('dblclick', e => {
-    const row = e.target.closest('.trow'); if (!row || e.target.closest('.more')) return;
+    const row = e.target.closest('.trow'); if (!row || e.target.closest('.more') || e.target.closest('.lk')) return;
     playList(list().map(t => t.id), +row.dataset.i);
   });
   container.addEventListener('contextmenu', e => {
@@ -229,9 +296,11 @@ function wireCards(el, get, open, songsOf, menu) {
   el.addEventListener('contextmenu', e => { const c = e.target.closest('.card'); if (!c) return; e.preventDefault(); menu(e, get(+c.dataset.i)); });
 }
 
-function albumHead(kicker, title, subHTML, coverHTML) {
+function albumHead(kicker, title, subHTML, coverHTML, extraHTML, opts) {
+  opts = opts || {};
+  const dis = opts.empty ? ' disabled' : '';
   return `<div class="dhead">${coverHTML}<div class="dmeta"><div class="kicker">${kicker}</div><div class="dtitle">${esc(title)}</div><div class="dsub">${subHTML}</div>
-    <div class="actions"><button class="btn primary" data-act="play">${ICON.play}Play</button><button class="btn" data-act="shuffle">${ICON.shuffle}Shuffle</button><button class="icon-btn" data-act="more" aria-label="More">${ICON.more}</button></div></div></div>`;
+    <div class="actions"><button class="btn primary" data-act="play"${dis}>${ICON.play}Play</button><button class="btn" data-act="shuffle"${dis}>${ICON.shuffle}Shuffle</button>${extraHTML || ''}<button class="icon-btn" data-act="more" aria-label="More">${ICON.more}</button></div></div></div>`;
 }
 function renderAlbum(el) {
   const a = albumByKey.get(view.arg);
@@ -259,7 +328,7 @@ function renderArtists(el) {
   el.innerHTML = `<div class="page">${scanStrip()}<div class="head"><h1>Artists</h1><span class="count">${query ? `${plural(list.length, 'result')} for “${esc(query)}”` : plural(list.length, 'artist')}</span></div>
     <div class="grid artists">${list.map((r, i) => `<div class="card" data-i="${i}">${cover(r.cover, 'round').replace('</div>', `<button class="card-play" aria-label="Play">${ICON.play}</button></div>`)}
     <div class="cn">${esc(r.name)}</div><div class="ca">${plural(r.albums.size, 'album')} · ${plural(r.tracks.length, 'song')}</div></div>`).join('')}</div></div>`;
-  wireCards(el, i => list[i], r => go('artist', r.name), r => artistSongs(r), (e, r) => songsMenu(e, artistSongs(r)));
+  wireCards(el, i => list[i], r => go('artist', r.name), r => artistSongs(r), (e, r) => artistMenu(e, r));
 }
 function artistSongs(r) {
   return [...r.tracks].sort((a, b) => coll.compare(a.album, b.album) || (a.disc - b.disc) || (a.track - b.track));
@@ -270,12 +339,13 @@ function renderArtist(el) {
   const songs = artistSongs(r);
   const als = [...r.albums].map(k => albumByKey.get(k)).filter(Boolean).sort((a, b) => (b.year - a.year) || coll.compare(a.name, b.name));
   const dur = songs.reduce((s, t) => s + t.duration, 0);
-  el.innerHTML = `<div class="page">${albumHead('Artist', r.name, `${plural(als.length, 'album')} · ${plural(songs.length, 'song')}, ${fmtLong(dur)}`, cover(r.cover, 'round'))}
+  el.innerHTML = `<div class="page">${albumHead('Artist', r.name, `${plural(als.length, 'album')} · ${plural(songs.length, 'song')}, ${fmtLong(dur)}`, cover(r.cover, 'round'), `<button class="btn" data-act="mix">${ICON.wave}Make a mix</button>`)}
     <div class="sec">Albums</div><div class="grid">${als.map((a, i) => `<div class="card" data-i="${i}">${cover(a.cover, 'r12').replace('</div>', `<button class="card-play" aria-label="Play">${ICON.play}</button></div>`)}<div class="cn">${esc(a.name)}</div><div class="ca">${a.year || plural(a.tracks.length, 'song')}</div></div>`).join('')}</div>
     <div class="sec">Songs</div></div>`;
   el.querySelector('.page').appendChild(plainList(songs));
   wireCards(el.querySelector('.grid'), i => als[i], a => go('album', a.key), a => a.tracks, (e, a) => albumMenu(e, a));
-  wireHead(el, () => songs, e => songsMenu(e, songs));
+  wireHead(el, () => songs, e => artistMenu(e, r));
+  el.querySelector('[data-act=mix]').onclick = () => makeMix('artist', r.name);
 }
 
 /* ---------- Playlists */
@@ -321,17 +391,250 @@ function deletePlaylist(p) {
   });
 }
 
+/* ---------- Smart: lists that keep themselves up to date */
+const AUTO_HINT = {
+  favorites: 'Click the heart on any song to add it here.',
+  most: 'Songs you play show up here. A play counts after half the song or 30 seconds.',
+  recent: 'Songs you play show up here, newest first.',
+  added: 'New music in your folders shows up here.',
+  never: 'You have played everything. Nice.',
+};
+function songCount(n) { return plural(n, 'song'); }
+function smartCard(i, name, songs, icon, sub) {
+  const cv = songs.length ? mosaic(songs).replace(/<\/div>$/, `<button class="card-play" aria-label="Play">${ICON.play}</button></div>`) : `<div class="cv r12 sm-ph">${ICON[icon] || ICON.spark}</div>`;
+  return `<div class="card" data-i="${i}">${cv}<div class="cn">${esc(name)}</div><div class="ca">${esc(sub != null ? sub : songCount(songs.length))}</div></div>`;
+}
+function renderSmart(el) {
+  const fixed = Sm.FIXED.map(a => ({ a, songs: evalRule(a.rule) }));
+  const mine = smartLists.map(p => ({ p, songs: evalRule(p.rule) }));
+  const genres = Sm.genreLists(tracks), decades = Sm.decadeLists(tracks);
+  const chips = list => list.map(a => `<button class="chip" data-k="${esc(a.key)}"><span>${esc(a.name)}</span><span class="chip-n">${a.count.toLocaleString()}</span></button>`).join('');
+  el.innerHTML = `<div class="page">${scanStrip()}<div class="head"><h1>Smart</h1><span class="count">Updates by itself as you listen</span>
+      <div class="actions"><button class="btn small primary" data-act="new">${ICON.plus}New smart playlist</button></div></div>
+    <div class="grid sm-grid" data-g="auto">${fixed.map((x, i) => smartCard(i, x.a.name, x.songs, AUTO_ICON[x.a.kind], x.songs.length ? null : 'Empty for now')).join('')}</div>
+    <div class="sec">Your smart playlists</div>
+    <div class="grid sm-grid" data-g="mine">${mine.map((x, i) => smartCard(i, x.p.name, x.songs, 'spark', `${songCount(x.songs.length)} · ${Sm.ruleSummary(x.p.rule)}`)).join('')}
+      <button class="sm-new" data-act="new"><span class="sm-new-in">${ICON.plus}<b>New smart playlist</b><span>Pick songs by genre, artist, year, plays, likes…</span></span></button></div>
+    ${genres.length ? `<div class="sec">Genres</div><div class="chips">${chips(genres)}</div>` : ''}
+    ${decades.length ? `<div class="sec">Decades</div><div class="chips">${chips(decades)}</div>` : ''}
+    ${!genres.length && !decades.length ? `<div class="sec">Genres and decades</div><div class="muted small">Your songs have no genre or year tags yet. Lists appear here as soon as they do.</div>` : ''}
+  </div>`;
+  el.querySelectorAll('[data-act=new]').forEach(b => b.onclick = () => openBuilder(null));
+  wireCards(el.querySelector('[data-g=auto]'), i => fixed[i], x => go('auto', x.a.key), x => x.songs, (e, x) => smartMenu(e, { auto: x.a }));
+  wireCards(el.querySelector('[data-g=mine]'), i => mine[i], x => go('smartpl', x.p.id), x => x.songs, (e, x) => smartMenu(e, { mine: x.p }));
+  el.querySelectorAll('.chip').forEach(c => {
+    c.onclick = () => go('auto', c.dataset.k);
+    c.oncontextmenu = e => { e.preventDefault(); const a = autoDef(c.dataset.k); if (a) smartMenu(e, { auto: a }); };
+  });
+}
+function smartSongsHead(kicker, name, sub, songs, extra) {
+  const dur = songs.reduce((s, t) => s + (t.duration || 0), 0);
+  return albumHead(kicker, name, `${sub}<span class="dsub2">${songs.length ? `${songCount(songs.length)}, ${fmtLong(dur)}` : 'No songs right now'}</span>`, songs.length ? mosaic(songs) : `<div class="cv r12 sm-ph">${ICON.spark}</div>`, extra, { empty: !songs.length });
+}
+function ruleChips(rule) {
+  const sortName = Sm.SORTS[rule.s];
+  return `<span class="rchips">${rule.c.length > 1 ? `<span class="rchip k">${rule.m === 'all' ? 'All of' : 'Any of'}</span>` : ''}${rule.c.map(c => `<span class="rchip">${esc(Sm.condSummary(c))}</span>`).join('') || '<span class="rchip">All songs</span>'}<span class="rchip k">${esc(sortName)}${rule.l ? ` · top ${rule.l}` : ''}</span></span>`;
+}
+function renderAuto(el) {
+  const a = autoDef(view.arg);
+  if (!a) return go('smart');
+  const songs = evalRule(a.rule);
+  const kicker = a.kind === 'genre' ? 'Genre' : a.kind === 'decade' ? 'Decade' : 'Smart playlist';
+  const sub = { favorites: 'Songs you liked, newest first', most: 'Your 50 most played songs', recent: 'The last 50 songs you played', added: 'The 50 newest songs in your folders', never: 'Songs you haven\u2019t played yet', genre: `Every song tagged ${esc(a.name)}`, decade: `Songs from ${a.rule.c[0].a} to ${a.rule.c[0].b}` }[a.kind];
+  el.innerHTML = `<div class="page">${smartSongsHead(kicker, a.name, sub, songs)}</div>`;
+  smartBody(el, songs, AUTO_HINT[a.kind] || 'Nothing matches right now.', a.kind === 'favorites' ? ICON.heart : ICON.spark);
+  wireHead(el, () => songs, e => smartMenu(e, { auto: a }));
+}
+function renderSmartPl(el) {
+  const p = smartLists.find(x => x.id === view.arg);
+  if (!p) return go('smart');
+  const songs = evalRule(p.rule);
+  el.innerHTML = `<div class="page">${smartSongsHead('Smart playlist', p.name, ruleChips(p.rule), songs, `<button class="btn" data-act="edit">${ICON.edit}Edit rules</button>`)}</div>`;
+  smartBody(el, songs, 'No songs match these rules right now. It fills up by itself when they do.', ICON.spark);
+  wireHead(el, () => songs, e => smartMenu(e, { mine: p }));
+  el.querySelector('[data-act=edit]').onclick = () => openBuilder(p);
+}
+function smartBody(el, songs, hint, icon) {
+  const page = el.querySelector('.page');
+  if (songs.length) page.appendChild(plainList(songs));
+  else page.insertAdjacentHTML('beforeend', `<div class="sm-empty"><div class="big">${icon}</div><div class="muted">${esc(hint)}</div></div>`);
+}
+function smartMenu(e, o) {
+  const name = o.auto ? o.auto.name : o.mine.name;
+  const songs = () => evalRule(o.auto ? o.auto.rule : o.mine.rule);
+  const items = [
+    { label: 'Play', icon: ICON.play, run: () => playList(songs().map(t => t.id), 0, { shuffle: false }) },
+    { label: 'Add to queue', icon: ICON.plus, run: () => addToQueue(songs().map(t => t.id)) },
+    { label: 'Save as playlist\u2026', icon: ICON.list, run: () => saveAsPlaylist(name, songs().map(t => t.id)) },
+  ];
+  if (o.auto) items.push('-', { label: 'Make my own from this\u2026', icon: ICON.spark, run: () => openBuilder(null, { name: o.auto.name, rule: o.auto.rule }) });
+  if (o.mine) items.push('-', { label: 'Edit rules\u2026', icon: ICON.edit, run: () => openBuilder(o.mine) }, { label: 'Delete', danger: true, run: () => deleteSmart(o.mine) });
+  openMenu(e, items);
+}
+function saveAsPlaylist(name, ids) {
+  if (!ids.length) return toast('Nothing to save yet');
+  ask('Save as playlist', name, 'Save', n => {
+    const p = { id: 'p' + Date.now().toString(36), name: n, ids: ids.slice() };
+    playlists.push(p); savePlaylists(); renderPlNav();
+    toast(`Saved “${n}” · ${songCount(ids.length)}`);
+  });
+}
+function deleteSmart(p) {
+  confirmBox(`Delete “${p.name}”?`, 'Only the rules are deleted. The songs stay in your library.', 'Delete', () => {
+    smartLists = Sm.remove(smartLists, p.id); saveSmart(); renderSmNav();
+    if (view.name === 'smartpl' && view.arg === p.id) go('smart'); else render();
+  });
+}
+function renderSmNav() {
+  const nav = $('#smNav'); if (!nav) return;
+  const fav = tracks.filter(t => isLiked(t.id)).length;
+  nav.innerHTML = `<button class="nav-item" data-sm="auto:favorites" data-kind="auto">${ICON.heart}<span>Favorites</span><span class="nav-count">${fav ? fav.toLocaleString() : ''}</span></button>`
+    + smartLists.map(p => `<button class="nav-item" data-sm="${esc(p.id)}" data-kind="mine">${ICON.spark}<span>${esc(p.name)}</span></button>`).join('');
+  nav.querySelectorAll('[data-sm]').forEach(b => {
+    b.onclick = () => go(b.dataset.kind === 'auto' ? 'auto' : 'smartpl', b.dataset.sm);
+    b.oncontextmenu = e => { e.preventDefault(); if (b.dataset.kind === 'auto') smartMenu(e, { auto: autoDef(b.dataset.sm) }); else smartMenu(e, { mine: smartLists.find(p => p.id === b.dataset.sm) }); };
+  });
+  const v = view.name;
+  nav.querySelectorAll('[data-sm]').forEach(n => n.classList.toggle('active', (v === 'auto' || v === 'smartpl') && n.dataset.sm === view.arg));
+}
+
+/* ---------- the rule builder: "New smart playlist" */
+function suggestions(f) {
+  const seen = new Map();
+  const add = v => { v = String(v || '').trim(); if (v && !seen.has(v.toLowerCase())) seen.set(v.toLowerCase(), v); };
+  if (f === 'genre') Sm.genreLists(tracks).forEach(g => add(g.name));
+  else if (f === 'artist') artists.forEach(r => add(r.name));
+  else if (f === 'album') albums.forEach(a => add(a.name));
+  return [...seen.values()].sort((a, b) => coll.compare(a, b)).slice(0, 400);
+}
+function openBuilder(existing, preset) {
+  const base = existing ? { name: existing.name, rule: existing.rule } : preset || { name: '', rule: { m: 'all', c: [Sm.newCond('genre')], s: 'artist', l: 0 } };
+  const st = { name: base.name, rule: JSON.parse(JSON.stringify(Sm.cleanRule(base.rule))) };
+  if (!existing && !st.rule.c.length && !preset) st.rule.c.push(Sm.newCond('genre'));
+  const lists = { genre: suggestions('genre'), artist: suggestions('artist'), album: suggestions('album') };
+  const datalists = Object.entries(lists).map(([k, v]) => `<datalist id="dl-${k}">${v.map(x => `<option value="${esc(x)}">`).join('')}</datalist>`).join('');
+  const sel = (cls, opts, cur) => `<span class="dd"><select class="${cls}">${opts.map(([v, l]) => `<option value="${esc(v)}"${String(v) === String(cur) ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></span>`;
+  const valueHTML = c => {
+    const kind = Sm.FIELDS[c.f].kind;
+    if (kind === 'text') return `<input class="rb-t" list="dl-${c.f}" value="${esc(c.t)}" placeholder="${c.f === 'genre' ? 'e.g. Hip-Hop' : c.f === 'artist' ? 'Artist name' : 'Album name'}" spellcheck="false">`;
+    if (kind === 'bool' || c.o === 'never') return '';
+    const num = (k, v, unit, step, w) => `<input class="rb-n" data-k="${k}" type="number" min="0" step="${step || 1}" value="${v}" style="width:${w || 74}px">${unit ? `<span class="rb-u">${unit}</span>` : ''}`;
+    if (c.f === 'duration') {
+      const m = v => Math.round(v / 6) / 10;
+      return c.o === 'between' ? `${num('a', m(c.a), '', 0.5)}<span class="rb-u">to</span>${num('b', m(c.b), 'min', 0.5)}` : num('a', m(c.a), 'min', 0.5);
+    }
+    if (kind === 'date') return num('a', c.a, c.a === 1 ? 'day' : 'days');
+    const unit = c.f === 'plays' ? 'plays' : '';
+    if (c.o === 'between') return `${num('a', c.a, '', 1, c.f === 'year' ? 84 : 74)}<span class="rb-u">to</span>${num('b', c.b, unit, 1, c.f === 'year' ? 84 : 74)}`;
+    return num('a', c.a, unit, 1, c.f === 'year' ? 84 : 74);
+  };
+  const rowHTMLb = (c, i) => `<div class="rb-row" data-i="${i}">${sel('rb-f', Sm.FIELD_ORDER.map(f => [f, Sm.FIELDS[f].label]), c.f)}${sel('rb-o', Sm.opsFor(c.f).map(o => [o, Sm.opLabel(o, c.f)]), c.o)}<span class="rb-v">${valueHTML(c)}</span>
+    <button class="icon-btn xs rb-x" title="Remove rule" aria-label="Remove rule">${ICON.x}</button></div>`;
+  modal(`<h3>${existing ? 'Edit smart playlist' : 'New smart playlist'}</h3>
+    <input class="rb-name" maxlength="80" placeholder="Name (optional)" value="${esc(st.name)}">
+    <div class="rb-match"><span>Songs that match</span><div class="seg" id="rbMatch"><button data-m="all">all</button><button data-m="any">any</button></div><span>of these rules</span></div>
+    <div class="rb-rules" id="rbRules"></div>
+    <button class="link rb-add" id="rbAdd">${ICON.plus}Add rule</button>
+    <div class="rb-opts"><label>Sort by ${sel('rb-s', Object.entries(Sm.SORTS), st.rule.s)}</label>
+      <label class="rb-lim"><span class="chk"><input type="checkbox" id="rbLimOn" ${st.rule.l ? 'checked' : ''}><span></span></span>Limit to <input class="rb-n" id="rbLim" type="number" min="1" step="1" value="${st.rule.l || 25}" style="width:70px"> songs</label></div>
+    <div class="rb-prev" id="rbPrev"></div>
+    <div class="actions">${existing ? `<button class="btn danger rb-del" data-del>${ICON.trash}Delete</button><span class="spacer"></span>` : ''}<button class="btn" data-x>Cancel</button><button class="btn primary" data-ok>${existing ? 'Save' : 'Create'}</button></div>${datalists}`, (card, close) => {
+    const rulesEl = card.querySelector('#rbRules');
+    const draw = () => { rulesEl.innerHTML = st.rule.c.map(rowHTMLb).join('') || '<div class="rb-none muted small">No rules: every song matches. Add one to narrow it down.</div>'; preview(); };
+    const preview = () => {
+      st.rule.l = card.querySelector('#rbLimOn').checked ? Math.max(1, Math.floor(+card.querySelector('#rbLim').value || 0)) : 0;
+      card.querySelector('#rbLim').disabled = !card.querySelector('#rbLimOn').checked;
+      card.querySelectorAll('#rbMatch button').forEach(b => b.classList.toggle('on', b.dataset.m === st.rule.m));
+      card.querySelector('.rb-match').classList.toggle('one', st.rule.c.length < 2);
+      const songs = evalRule(st.rule);
+      const total = Sm.count(Object.assign({}, st.rule, { l: 0 }), tracks, stats, smartNow());
+      card.querySelector('#rbPrev').innerHTML = `<b>${songCount(songs.length)}</b>${st.rule.l && total > songs.length ? ` <span class="muted">of ${total.toLocaleString()} that match</span>` : ''}${songs.length ? `<span class="rb-eg">${songs.slice(0, 3).map(t => esc(t.title)).join(', ')}${songs.length > 3 ? '\u2026' : ''}</span>` : '<span class="rb-eg">Nothing matches yet. It fills up by itself when songs do.</span>'}`;
+    };
+    rulesEl.addEventListener('change', e => {
+      const row = e.target.closest('.rb-row'); if (!row) return;
+      const i = +row.dataset.i, c = st.rule.c[i];
+      if (e.target.classList.contains('rb-f')) { st.rule.c[i] = Sm.newCond(e.target.value); draw(); return; }
+      if (e.target.classList.contains('rb-o')) {
+        c.o = e.target.value;
+        if (c.o === 'between' && c.f === 'plays' && !c.b) c.b = Math.max(c.a + 5, 10);
+        if (c.o === 'between' && c.f === 'duration' && c.b <= c.a) c.b = c.a + 120;
+        draw(); return;
+      }
+    });
+    rulesEl.addEventListener('input', e => {
+      const row = e.target.closest('.rb-row'); if (!row) return;
+      const c = st.rule.c[+row.dataset.i];
+      if (e.target.classList.contains('rb-t')) c.t = e.target.value;
+      else if (e.target.classList.contains('rb-n')) { const v = Math.max(0, +e.target.value || 0); c[e.target.dataset.k] = c.f === 'duration' ? Math.round(v * 60) : Math.round(v); }
+      preview();
+    });
+    rulesEl.addEventListener('click', e => { const x = e.target.closest('.rb-x'); if (!x) return; st.rule.c.splice(+x.closest('.rb-row').dataset.i, 1); draw(); });
+    card.querySelector('#rbAdd').onclick = () => {
+      const used = new Set(st.rule.c.map(c => c.f));
+      const next = ['genre', 'year', 'plays', 'artist', 'liked', 'added', 'lastPlayed', 'duration', 'album'].find(f => !used.has(f)) || 'genre';
+      st.rule.c.push(Sm.newCond(next)); draw();
+      const ins = rulesEl.querySelectorAll('.rb-row'); const last = ins[ins.length - 1]; if (last) { const f = last.querySelector('input'); if (f) f.focus(); }
+    };
+    card.querySelectorAll('#rbMatch button').forEach(b => b.onclick = () => { st.rule.m = b.dataset.m; preview(); });
+    card.querySelector('.rb-s').onchange = e => { st.rule.s = e.target.value; preview(); };
+    card.querySelector('#rbLimOn').onchange = preview;
+    card.querySelector('#rbLim').oninput = preview;
+    const ok = () => {
+      const name = card.querySelector('.rb-name').value.trim() || (st.rule.c.length ? Sm.condSummary(st.rule.c[0]) : 'All songs');
+      const rule = Sm.cleanRule(st.rule);
+      if (existing) { smartLists = Sm.update(smartLists, existing.id, name, rule); saveSmart(); close(); renderSmNav(); render(); toast('Smart playlist updated'); return; }
+      const r = Sm.create(smartLists, name, rule, Date.now());
+      smartLists = r.list; saveSmart(); close(); renderSmNav(); go('smartpl', r.item.id);
+      toast(`Created “${r.item.name}”`);
+    };
+    card.querySelector('[data-ok]').onclick = ok;
+    card.querySelector('[data-x]').onclick = close;
+    const del = card.querySelector('[data-del]'); if (del) del.onclick = () => { close(); deleteSmart(existing); };
+    card.addEventListener('keydown', e => { if (e.key === 'Escape') { e.stopPropagation(); close(); } if (e.key === 'Enter' && e.target.matches('.rb-name')) ok(); });
+    draw();
+    if (!existing) card.querySelector('.rb-name').focus();
+  }, 'wide');
+}
+
+/* ---------- Make a mix: from a song or an artist; same artist, then the same genre and era */
+let mixSeq = 0;
+function makeMix(kind, ref, again) {
+  const rnd = Math.floor(Math.random() * 1e9) + 1;
+  let m;
+  if (kind === 'song') { const t = byId.get(ref); if (!t) return; m = Sm.mixFromSong(t, tracks, stats, rnd); }
+  else m = Sm.mixFromArtist(ref, tracks, stats, rnd);
+  if (m.ids.length < 2) return toast('Not enough similar songs for a mix yet');
+  const id = 'm' + (++mixSeq);
+  mixes.set(id, Object.assign(m, { kind, ref, rnd }));
+  if (again && view.name === 'mix') { view = { name: 'mix', arg: id }; render(); } else go('mix', id);
+}
+function renderMix(el) {
+  const m = mixes.get(view.arg);
+  if (!m) return go('smart');
+  const songs = m.ids.map(id => byId.get(id)).filter(Boolean);
+  const sub = m.kind === 'song' ? `From “${esc(m.seed)}”: the same artist, then the same genre and era` : `From ${esc(m.seed)}: their songs, then the same genre and era`;
+  el.innerHTML = `<div class="page">${smartSongsHead('Mix', m.name, sub, songs, `<button class="btn" data-act="save">${ICON.list}Save as playlist</button><button class="btn" data-act="again">${ICON.refresh}New mix</button>`)}</div>`;
+  el.querySelector('.page').appendChild(plainList(songs));
+  wireHead(el, () => songs, e => songsMenu(e, songs));
+  el.querySelector('[data-act=save]').onclick = () => saveAsPlaylist(m.name, m.ids);
+  el.querySelector('[data-act=again]').onclick = () => makeMix(m.kind, m.ref, true);
+}
+
 /* ---------- Now playing */
 function renderNow(el) {
   const t = byId.get(Q.current());
   if (!t) { el.innerHTML = `<div class="empty"><div class="big">${ICON.note}</div><h2>Nothing playing</h2><div class="muted">Pick a song from your library.</div></div>`; return; }
   const next = Q.upcoming().slice(0, 3).map(u => byId.get(u.id)).filter(Boolean);
+  const lk = isLiked(t.id);
   el.innerHTML = `<div class="nowv"><div class="now">${cover(t.cover, 'r12')}<div class="now-t">${esc(t.title)}</div>
     <div class="now-a"><b data-artist="${esc(t.artist)}">${esc(t.artist)}</b> · <b data-album="${esc(albumKey(t))}">${esc(t.album)}</b></div>
+    <div class="now-acts"><button class="btn small lkb${lk ? ' on' : ''}" data-act="like">${ICON.heart}<span>${lk ? 'Liked' : 'Like'}</span></button><button class="btn small" data-act="mix">${ICON.wave}Make a mix</button></div>
     ${next.length ? `<div class="now-next"><div class="sec">Up next</div>${next.map((n, i) => `<div class="trow" data-q="${Q.pos + 1 + i}"><span class="tt">${cover(n.cover, 'r6')}<span class="tl"><span class="t1">${esc(n.title)}</span><span class="t2">${esc(n.artist)}</span></span></span><span class="td">${fmt(n.duration)}</span></div>`).join('')}</div>` : ''}</div></div>`;
   const ar = el.querySelector('[data-artist]'); ar.onclick = () => { const r = artistByName.get(t.artist.toLowerCase()); if (r) go('artist', r.name); };
   const al = el.querySelector('[data-album]'); al.onclick = () => { if (albumByKey.has(albumKey(t))) go('album', albumKey(t)); };
   el.querySelectorAll('[data-q]').forEach(r => r.ondblclick = r.onclick = () => { Q.jump(+r.dataset.q); load(Q.current()); });
+  el.querySelector('[data-act=like]').onclick = () => toggleLike(t.id);
+  el.querySelector('[data-act=mix]').onclick = () => { if (byId.has(t.id) && !t._dropped) makeMix('song', t.id); else toast('Mixes are made from songs in your library'); };
 }
 
 /* ---------- Settings */
@@ -389,23 +692,26 @@ function closeMenu() { $('#menu').hidden = true; }
 function playlistSub(ids) {
   return () => [{ head: 'Add to playlist' }, { label: 'New playlist…', icon: ICON.plus, run: () => newPlaylist(ids) }, ...(playlists.length ? ['-', { scroll: playlists.map(p => ({ label: p.name, icon: ICON.list, run: () => addToPlaylist(p, ids) })) }] : [])];
 }
-function songsMenu(e, list) {
+function songsMenu(e, list, extra) {
   const ids = list.map(t => t.id);
   openMenu(e, [
     { label: 'Play', icon: ICON.play, run: () => playList(ids, 0, { shuffle: false }) },
     { label: 'Play next', icon: ICON.queue, run: () => { playNext(ids); } },
     { label: 'Add to queue', icon: ICON.plus, run: () => { addToQueue(ids); } },
-    '-', { label: 'Add to playlist', icon: ICON.list, sub: playlistSub(ids) },
+    '-', { label: 'Add to playlist', icon: ICON.list, sub: playlistSub(ids) }, ...(extra || []),
   ]);
 }
 function albumMenu(e, a) { songsMenu(e, a.tracks); }
+function artistMenu(e, r) { songsMenu(e, artistSongs(r), [{ label: 'Make a mix', icon: ICON.wave, run: () => makeMix('artist', r.name) }]); }
 function trackMenu(e, list, i, ctx) {
   const t = list[i];
   const items = [
     { label: 'Play', icon: ICON.play, run: () => playList(list.map(x => x.id), i) },
     { label: 'Play next', icon: ICON.queue, run: () => playNext([t.id]) },
     { label: 'Add to queue', icon: ICON.plus, run: () => addToQueue([t.id]) },
-    '-', { label: 'Add to playlist', icon: ICON.list, sub: playlistSub([t.id]) },
+    '-', { label: isLiked(t.id) ? 'Unlike' : 'Like', icon: ICON.heart, run: () => toggleLike(t.id) },
+    { label: 'Add to playlist', icon: ICON.list, sub: playlistSub([t.id]) },
+    { label: 'Make a mix', icon: ICON.wave, run: () => makeMix('song', t.id) },
   ];
   if (ctx && ctx.playlist) items.push({ label: 'Remove from this playlist', icon: ICON.x, run: () => { const p = ctx.playlist; const k = p.ids.indexOf(t.id); if (k >= 0) p.ids.splice(k, 1); savePlaylists(); render(); } });
   items.push('-');
@@ -426,8 +732,9 @@ function sortMenu(e) {
   const r = $('#sortBtn').getBoundingClientRect();
   openMenu({ clientX: r.right - 210, clientY: r.bottom + 6 }, [{ head: 'Sort by' }, ...Object.entries(opts).map(([id, [label]]) => ({ label, checked: sortBy[k] === id, run: () => { sortBy[k] = id; render(); persistSoon(); } }))]);
 }
-function modal(html, onOpen) {
+function modal(html, onOpen, cls) {
   const m = $('#modal'), c = $('#modalCard');
+  c.className = 'modal-card' + (cls ? ' ' + cls : '');
   c.innerHTML = html; m.hidden = false;
   const close = () => { m.hidden = true; };
   m.onclick = ev => { if (ev.target === m) close(); };
@@ -452,6 +759,11 @@ const audios = [$('#a0'), $('#a1')];
 let ai = 0;                       // index of the element playing now
 const A = () => audios[ai], N = () => audios[1 - ai];
 let curId = null, preId = null, errStreak = 0, volume = 0.8, muted = false, seeking = false, pendingSeek = 0;
+// Play counting: a song counts after half of it, or 30 s, of real listening (paused time and seeking don't count).
+const counter = new Sm.PlayCounter(30000, 0.5);
+const clock = () => performance.now();
+function countBegin(id, playing) { const t = byId.get(id); recordPlay(counter.begin(id, t ? (t.duration || 0) * 1000 : 0, !!playing, clock())); }
+function countCheck() { recordPlay(counter.check(clock())); }
 const player = $('#player');
 
 function curve(v) { return v * v; }  // perceived loudness
@@ -474,6 +786,7 @@ function load(id, opts) {
   if (!t) { curId = null; updateNow(); return; }
   curId = id;
   const autoplay = opts.autoplay !== false;
+  countBegin(id, false);  // the clock starts on the 'play' event
   if (preId === id && N().getAttribute('src')) {
     const old = A(); ai = 1 - ai; old.pause(); old.removeAttribute('src'); old.load();
   } else {
@@ -497,9 +810,10 @@ function next() { const id = Q.next(false); if (id) load(id); }
 function prev() { if (A().currentTime > 3 || Q.pos <= 0 && Q.repeat === 'off') { A().currentTime = 0; return; } const id = Q.prev(); if (id) load(id); }
 function ended() {
   errStreak = 0;
+  countCheck();
   const id = Q.next(true);
   if (!id) { A().currentTime = 0; A().pause(); updateState(); return; }
-  if (id === curId && Q.repeat === 'one') { A().currentTime = 0; A().play(); return; }
+  if (id === curId && Q.repeat === 'one') { countBegin(id, false); A().currentTime = 0; A().play(); return; }
   load(id);
 }
 function dropPreload() { N().pause(); N().removeAttribute('src'); preId = null; }
@@ -516,10 +830,12 @@ function preloadNext() {
 for (const [i, a] of audios.entries()) {
   const mine = () => audios[ai] === a;
   a.addEventListener('ended', () => { if (mine()) ended(); });
-  a.addEventListener('loadedmetadata', () => { if (mine() && pendingSeek) { a.currentTime = Math.min(pendingSeek, a.duration || pendingSeek); pendingSeek = 0; } if (mine()) tick(); });
-  a.addEventListener('timeupdate', () => { if (mine()) tick(); });
+  a.addEventListener('loadedmetadata', () => { if (mine() && pendingSeek) { a.currentTime = Math.min(pendingSeek, a.duration || pendingSeek); pendingSeek = 0; } if (mine()) { if (counter.id === curId && a.duration > 0 && isFinite(a.duration)) counter.setDuration(a.duration * 1000); tick(); } });
+  a.addEventListener('timeupdate', () => { if (mine()) { tick(); if (!a.paused) countCheck(); } });
+  a.addEventListener('playing', () => { if (mine()) recordPlay(counter.setPlaying(true, clock())); });
+  a.addEventListener('waiting', () => { if (mine()) recordPlay(counter.setPlaying(false, clock())); });
   a.addEventListener('play', () => { if (mine()) { errStreak = 0; updateState(); setTimeout(preloadNext, 1500); } });
-  a.addEventListener('pause', () => { if (mine()) { updateState(); persistSoon(); } });
+  a.addEventListener('pause', () => { if (mine()) { recordPlay(counter.setPlaying(false, clock())); updateState(); persistSoon(); } });
   a.addEventListener('seeked', () => { if (mine()) mediaState(); });
   a.addEventListener('error', () => {
     if (!mine()) { if (preId) preId = null; return; }
@@ -551,7 +867,7 @@ function updateNow() {
   $('#npTitle').textContent = t ? t.title : 'Nothing playing';
   $('#npArtist').textContent = t ? t.artist : 'Pick a song to start';
   document.title = t ? `${t.title} · ${t.artist}` : 'Paradox Music';
-  updateState(); tick();
+  updateState(); tick(); syncLike();
   document.querySelectorAll('.trow[data-id]').forEach(r => r.classList.toggle('cur', r.dataset.id === curId));
   if (view.name === 'now') render();
   refreshQueue();
@@ -610,13 +926,13 @@ function persistNow() {
   if (demo) return;
   lastPersist = Date.now();
   const a = A();
-  const st = { cur: curId, position: a.currentTime || 0, volume, muted, queue: Q.toJSON(), view: ['songs', 'albums', 'artists'].includes(view.name) ? view.name : 'songs', sortBy };
+  const st = { cur: curId, position: a.currentTime || 0, volume, muted, queue: Q.toJSON(), view: ['songs', 'albums', 'artists', 'smart'].includes(view.name) ? view.name : 'songs', sortBy };
   // songs from dropped files are not in the library; keep only library songs in the saved queue
   const lib = new Set(tracks.map(t => t.id));
   if (st.queue.items.some(id => !lib.has(id))) { st.queue = { items: [], base: [], pos: -1, shuffle: Q.shuffle, repeat: Q.repeat }; if (!lib.has(curId)) st.cur = null; }
   save('state', st);
 }
-window.addEventListener('beforeunload', persistNow);
+window.addEventListener('beforeunload', () => { persistNow(); saveStatsNow(); });
 
 /* ------------------------------------------------------------------ scanning */
 async function rescan(loud) {
@@ -627,6 +943,7 @@ async function rescan(loud) {
     const list = await invoke('scan');
     const before = tracks.length;
     indexLibrary(list);
+    renderSmNav();
     Q.prune(id => byId.has(id));
     settings.lastScan = Date.now(); saveSettings();
     scanning = false;
@@ -687,7 +1004,7 @@ async function startSetup() {
 }
 function enterLibrary() {
   app.dataset.mode = 'lib';
-  renderPlNav();
+  renderPlNav(); renderSmNav();
   render();
 }
 
@@ -720,6 +1037,8 @@ $('#sortBtn').onclick = e => { e.stopPropagation(); sortMenu(e); };
 $('#scanBtn').onclick = () => rescan(true);
 $('#backBtn').onclick = back;
 $('#newPl').onclick = () => newPlaylist();
+$('#newSm').onclick = () => openBuilder(null);
+$('#likeBtn').onclick = () => { if (curId) toggleLike(curId); };
 document.querySelectorAll('.nav-item[data-view]').forEach(n => n.onclick = () => go(n.dataset.view));
 $('#sbToggle').onclick = () => { app.dataset.sidebar = 'open'; };
 $('#sbClose').onclick = () => { app.dataset.sidebar = 'closed'; };
@@ -740,7 +1059,7 @@ document.addEventListener('keydown', e => {
     if (!$('#modal').hidden) return;
     if (inField) { setQuery(''); e.target.blur(); return; }
     if (app.dataset.queue === 'open') return toggleQueue(false);
-    if (['album', 'artist', 'now'].includes(view.name)) return back();
+    if (['album', 'artist', 'now', 'auto', 'smartpl', 'mix'].includes(view.name)) return back();
     return;
   }
   if (!$('#modal').hidden) return;
@@ -788,6 +1107,8 @@ async function start() {
   demo = B.demo || null;
   settings = Object.assign({ folders: [], theme: 'system', gapless: true }, B.settings || {});
   playlists = Array.isArray(B.playlists) ? B.playlists : [];
+  stats = Sm.Stats.load(B.stats);
+  smartLists = Sm.loadSmart(B.smart);
   applyTheme();
   indexLibrary(B.library || []);
   const st = B.state || {};
@@ -834,6 +1155,7 @@ async function runDemo(d) {
   if (d.sort) Object.assign(sortBy, d.sort);
   if (d.play != null) {
     const ids = albums.sort(SORTS.albums.name[1]).flatMap(a => a.tracks.map(t => t.id));
+    if (d.playTitle) d.play = Math.max(0, ids.findIndex(id => byId.get(id).title === d.playTitle));
     Q.set(ids, d.play, { shuffle: !!d.shuffle }); if (d.repeat) Q.setRepeat(d.repeat); syncToggles();
     load(Q.current(), { autoplay: false });
     const a = A();
@@ -846,10 +1168,19 @@ async function runDemo(d) {
   if (d.view === 'album') { const a = albums.sort(SORTS.albums.name[1])[d.album || 0]; view = { name: 'album', arg: a.key }; }
   else if (d.view === 'artist') { view = { name: 'artist', arg: artists.sort(SORTS.artists.name[1])[d.artist || 0].name }; }
   else if (d.view === 'playlist') { view = { name: 'playlist', arg: (playlists[0] || {}).id }; }
+  else if (d.view === 'auto') { view = { name: 'auto', arg: d.key }; }
+  else if (d.view === 'smartpl') { view = { name: 'smartpl', arg: (smartLists[d.idx || 0] || {}).id }; }
+  else if (d.view === 'mix') {
+    const seed = d.mixArtist ? null : tracks.find(t => t.title === d.mixSong) || tracks[0];
+    const m = d.mixArtist ? Sm.mixFromArtist(d.mixArtist, tracks, stats, 7) : Sm.mixFromSong(seed, tracks, stats, 7);
+    mixes.set('m0', Object.assign(m, { kind: d.mixArtist ? 'artist' : 'song', ref: d.mixArtist || seed.id, rnd: 7 })); view = { name: 'mix', arg: 'm0' };
+  }
   else if (d.view) view = { name: d.view, arg: null };
   if (d.query) setQuery(d.query, true);
   render();
   if (d.queue) toggleQueue(true);
+  renderSmNav();
+  if (d.builder) openBuilder(d.builder === 'edit' ? smartLists[d.idx || 0] : null, d.builder === 'edit' ? null : d.preset);
   if (d.menu) {
     await new Promise(r => setTimeout(r, 1800));  // after the window is shown (showing it fires resize, which closes menus)
     const row = document.querySelectorAll('.trow')[d.menu.row || 0];
