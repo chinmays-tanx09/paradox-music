@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.ParadoxMusic" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowSplashScreenBackground">#000000</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_fg</item>
+    </style>
+</resources>

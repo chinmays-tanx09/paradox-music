@@ -38,6 +38,10 @@ Local (needs Node 20+, Rust stable and the Tauri 2 prerequisites for your OS, on
 
 The Rust tests use small audio files made with ffmpeg in `src-tauri/tests/fixtures/music` (MP3, M4A and FLAC with embedded 800×800 cover art, OGG and Opus with tags, an untagged WAV next to a cover.jpg).
 
+## Android
+
+There is also an Android version of Paradox Music (Kotlin, Jetpack Compose, Media3) in [`android/`](android/), with its own build instructions in [`android/README.md`](android/README.md). It has not been tested on a real device by the author yet.
+
 ## License
 
 MIT, see [LICENSE](LICENSE).

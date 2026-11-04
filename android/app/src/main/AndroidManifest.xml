@@ -1,0 +1,49 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Background playback: a media-playback foreground service while music plays. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Only for the update check (GitHub releases, at most every 12 h). Music never leaves the phone. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Media3 asks for this to watch network type for streaming; this app never streams. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
+    <!-- Music is read through the folder the user picks (Storage Access Framework); no media/storage permission is needed. -->
+
+    <application
+        android:name=".MusicApp"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.ParadoxMusic"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction"
+        android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="34">
+
+        <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|uiMode|keyboardHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".play.PlaybackService" android:exported="true" android:foregroundServiceType="mediaPlayback"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+
+        <!-- Lets a headset / Bluetooth / car "play" resume the last song even when the app is closed. -->
+        <receiver android:name="androidx.media3.session.MediaButtonReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
