@@ -18,10 +18,26 @@ A minimal, fully offline music player for Windows, in the same look as College W
 
 Keyboard: Space play/pause · Ctrl+← / Ctrl+→ previous/next · ← / → seek 5 s · Ctrl+F search · Ctrl+B sidebar.
 
+## Install (Windows)
+
+Download from the [latest release](https://github.com/chinmays-tanx09/paradox-music/releases/latest) and check the file against `SHA256SUMS.txt`:
+
+1. Most PCs: `Paradox.Music_<version>_x64-setup.exe`. Snapdragon / Surface Pro X (Windows on ARM): the `arm64` setup instead. The `.msi` files are the same app for managed PCs.
+2. Run it and follow the installer. Paradox Music installs for your user only.
+3. Open Paradox Music, choose your music folder, press Start.
+
+The installers are not code-signed, so Windows SmartScreen may warn ("Windows protected your PC": More info → Run anyway) and Defender can flag unsigned downloads. Check the SHA-256 first, or build it yourself below.
+
+**Untested on a real Windows PC.** The app is built and its tests run on GitHub's `windows-latest` runner, and the UI was exercised in a headless browser, but it has not been run by a person on real Windows hardware yet. Bug reports are welcome.
+
 ## Build
 
 Tauri 2 (Rust) + plain HTML/CSS/JS, like College WiFi desktop. Pushing a tag `v*` runs `.github/workflows/build.yml`, which tests, builds the x64 and ARM64 setup .exe and .msi, attaches them to the release and lists gofile links with SHA-256 in the release notes.
 
-Local: `npm install`, then `npm test` (queue logic, smart playlist rules, play counting and mixes, and library scan tests) and `npx tauri build`.
+Local (needs Node 20+, Rust stable and the Tauri 2 prerequisites for your OS, on Windows the WebView2 runtime and MSVC build tools): `npm install`, then `npm test` (queue logic, smart playlist rules, play counting and mixes, and library scan tests) and `npx tauri build`.
 
 The Rust tests use small audio files made with ffmpeg in `src-tauri/tests/fixtures/music` (MP3, M4A and FLAC with embedded 800×800 cover art, OGG and Opus with tags, an untagged WAV next to a cover.jpg).
+
+## License
+
+MIT, see [LICENSE](LICENSE).
