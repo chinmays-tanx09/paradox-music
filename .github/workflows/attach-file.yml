@@ -1,0 +1,37 @@
+name: Attach a text file to a release
+
+# Manual only: puts one small text file (for example SHA256SUMS.txt) on an existing release.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag, for example v1.1.0
+        required: true
+      name:
+        description: Asset name, for example SHA256SUMS.txt
+        required: true
+      content:
+        description: The exact text of the file
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Attach the file
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+          NAME: ${{ inputs.name }}
+          CONTENT: ${{ inputs.content }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          case "$NAME" in ""|*/*|*..*) echo "bad asset name"; exit 1;; esac
+          dir=$(mktemp -d)
+          printf '%s\n' "$CONTENT" > "$dir/$NAME"
+          gh release upload "$TAG" "$dir/$NAME" --repo "$REPO" --clobber
+          gh release view "$TAG" --repo "$REPO" --json assets --jq '.assets[] | "\(.name) \(.size)"'
