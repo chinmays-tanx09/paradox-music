@@ -129,10 +129,17 @@ jobs:
           pattern: links-*
           merge-multiple: true
           path: links
+      - name: SHA256SUMS.txt for the release
+        run: |
+          node scripts/release-notes.js links sums > SHA256SUMS.txt
+          cat SHA256SUMS.txt
       - name: Release notes with download links and checksums
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
         run: |
           node scripts/release-notes.js links > notes.md
           cat notes.md
           gh release edit "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --notes-file notes.md
+          gh release upload "$GITHUB_REF_NAME" SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
